@@ -1,3 +1,8 @@
+## Calculating the inverse of a matrix is computationally expensive
+## This set of functions enables caching of matrix inverse, saving time!
+
+## makeCacheMatrix creates a special matrix that can cache its inverse
+
 makeCacheMatrix <- function(x=matrix()){
   inverse <- NULL
   set <- function(y){
@@ -9,6 +14,9 @@ makeCacheMatrix <- function(x=matrix()){
   get_solve <- function() inverse
   list(set = set, get = get, set_solve = set_solve, get_solve = get_solve)
 }
+
+## cacheSolve takes a special matrix (from makeCacheMatrix) and calculates inverse
+## if inverse has already been calculated/cached, the inverse is retrieved (not calculated)
 
 cacheSolve <- function(x,...){
   inverse <- x$get_solve()
@@ -22,7 +30,7 @@ cacheSolve <- function(x,...){
   inverse
 }
 
-# Define the first matrix
+# Start the function execution
 first_matrix <- matrix(c(-2,4,1,-3),nrow=2,ncol=2)
 
 # Apply makeCacheMatrix function over first matrix, out1 as the output
